@@ -7,12 +7,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .views import UserViewSet, TeamViewSet, ActivityViewSet, LeaderboardViewSet, WorkoutViewSet
 
-codespace_name = os.environ.get('CODESPACE_NAME')
-if codespace_name:
-    base_url = f"https://{codespace_name}-8000.app.github.dev"
-else:
-    base_url = "http://localhost:8000"
-
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'teams', TeamViewSet)
@@ -21,8 +15,16 @@ router.register(r'leaderboard', LeaderboardViewSet)
 router.register(r'workouts', WorkoutViewSet)
 
 
+def get_base_url():
+    codespace_name = os.environ.get('CODESPACE_NAME')
+    if codespace_name:
+        return f"https://{codespace_name}-8000.app.github.dev"
+    return "http://localhost:8000"
+
+
 @api_view(['GET'])
 def api_root(request):
+    base_url = get_base_url()
     return Response({
         'message': 'OctoFit Tracker API',
         'base_url': base_url,
