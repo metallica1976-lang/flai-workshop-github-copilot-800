@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = process.env.REACT_APP_CODESPACE_NAME
-  ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-
 const EMPTY_FORM = { name: '', email: '', age: '', team_id_write: '' };
 
 function Users() {
@@ -15,8 +11,12 @@ function Users() {
   const [saving, setSaving]   = useState(false);
   const [saveError, setSaveError] = useState(null);
 
-  const usersEndpoint = `${API_BASE}/api/users/`;
-  const teamsEndpoint = `${API_BASE}/api/teams/`;
+  const usersEndpoint = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/';
+  const teamsEndpoint = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+    : 'http://localhost:8000/api/teams/';
 
   const loadUsers = () =>
     fetch(usersEndpoint)

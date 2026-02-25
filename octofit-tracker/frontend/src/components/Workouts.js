@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const API_BASE = process.env.REACT_APP_CODESPACE_NAME
-  ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState(null);
-  const endpoint = `${API_BASE}/api/workouts/`;
+  const endpoint = process.env.REACT_APP_CODESPACE_NAME
+    ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/workouts/`
+    : 'http://localhost:8000/api/workouts/';
 
   useEffect(() => {
     console.log('Workouts: fetching from', endpoint);
