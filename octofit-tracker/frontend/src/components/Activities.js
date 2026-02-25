@@ -9,10 +9,6 @@ const formatDate = (dateStr) => {
   });
 };
 
-const API_BASE = process.env.REACT_APP_CODESPACE_NAME
-  ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState(null);
