@@ -23,28 +23,34 @@ function Teams() {
       });
   }, [endpoint]);
 
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (error) return <div className="alert alert-danger status-card">⚠️ Error loading teams: {error}</div>;
+  if (!teams.length) return <div className="alert alert-info status-card">Loading teams...</div>;
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-3">Teams</h2>
-      {teams.map(team => (
-        <div key={team.id} className="card mb-3">
-          <div className="card-header bg-dark text-white">
-            <strong>{team.name}</strong>
+    <div>
+      <h2 className="page-heading">🏆 Teams</h2>
+      <div className="row">
+        {teams.map(team => (
+          <div key={team.id} className="col-md-6">
+            <div className="octofit-card card">
+              <div className="card-header">
+                🏅 {team.name}
+                <span className="badge bg-light text-dark ms-2">{(team.members || []).length} members</span>
+              </div>
+              <div className="card-body p-0">
+                <ul className="list-group list-group-flush">
+                  {(team.members || []).map(member => (
+                    <li key={member.id} className="list-group-item d-flex justify-content-between align-items-center">
+                      <span><strong>{member.name}</strong></span>
+                      <span className="text-muted small">{member.email}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="card-body">
-            <h6 className="card-subtitle mb-2 text-muted">Members</h6>
-            <ul className="list-group list-group-flush">
-              {(team.members || []).map(member => (
-                <li key={member.id} className="list-group-item">
-                  {member.name} — {member.email}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

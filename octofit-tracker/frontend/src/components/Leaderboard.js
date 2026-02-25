@@ -23,29 +23,38 @@ function Leaderboard() {
       });
   }, [endpoint]);
 
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (error) return <div className="alert alert-danger status-card">⚠️ Error loading leaderboard: {error}</div>;
+  if (!entries.length) return <div className="alert alert-info status-card">Loading leaderboard...</div>;
+
+  const rankClass = i => i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-3">Leaderboard</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entries.map((entry, index) => (
-            <tr key={entry.id}>
-              <td>{index + 1}</td>
-              <td>{entry.user?.name || entry.user}</td>
-              <td>{entry.score}</td>
+    <div>
+      <h2 className="page-heading">📊 Leaderboard</h2>
+      <div className="octofit-table">
+        <table className="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Score</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {entries.map((entry, index) => (
+              <tr key={entry.id}>
+                <td>
+                  <span className={`rank-badge ${rankClass(index)}`}>{index + 1}</span>
+                </td>
+                <td><strong>{entry.user?.name || entry.user}</strong></td>
+                <td className="text-muted small">{entry.user?.email || '—'}</td>
+                <td><span className="score-pill">{entry.score}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

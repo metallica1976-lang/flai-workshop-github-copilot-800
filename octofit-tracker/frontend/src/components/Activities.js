@@ -23,31 +23,36 @@ function Activities() {
       });
   }, [endpoint]);
 
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (error) return <div className="alert alert-danger status-card">⚠️ Error loading activities: {error}</div>;
+  if (!activities.length) return <div className="alert alert-info status-card">Loading activities...</div>;
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-3">Activities</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>User</th>
-            <th>Activity Type</th>
-            <th>Duration (min)</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {activities.map(activity => (
-            <tr key={activity.id}>
-              <td>{activity.user?.name || activity.user}</td>
-              <td>{activity.activity_type}</td>
-              <td>{activity.duration}</td>
-              <td>{activity.date}</td>
+    <div>
+      <h2 className="page-heading">🏃 Activities</h2>
+      <div className="octofit-table">
+        <table className="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Activity Type</th>
+              <th>Duration</th>
+              <th>Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {activities.map((activity, index) => (
+              <tr key={activity.id}>
+                <td>{index + 1}</td>
+                <td><strong>{activity.user?.name || activity.user}</strong></td>
+                <td><span className="badge" style={{backgroundColor:'#0f3460'}}>{activity.activity_type}</span></td>
+                <td><span className="score-pill">{activity.duration} min</span></td>
+                <td>{activity.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

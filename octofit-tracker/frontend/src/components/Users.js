@@ -23,29 +23,34 @@ function Users() {
       });
   }, [endpoint]);
 
-  if (error) return <div className="alert alert-danger">Error: {error}</div>;
+  if (error) return <div className="alert alert-danger status-card">⚠️ Error loading users: {error}</div>;
+  if (!users.length) return <div className="alert alert-info status-card">Loading users...</div>;
 
   return (
-    <div className="container mt-4">
-      <h2 className="mb-3">Users</h2>
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.age}</td>
+    <div>
+      <h2 className="page-heading">👤 Users</h2>
+      <div className="octofit-table">
+        <table className="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Age</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={user.id}>
+                <td>{index + 1}</td>
+                <td><strong>{user.name}</strong></td>
+                <td><a href={`mailto:${user.email}`} className="text-decoration-none">{user.email}</a></td>
+                <td><span className="badge bg-secondary">{user.age} yrs</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
