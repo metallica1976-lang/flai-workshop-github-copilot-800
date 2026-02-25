@@ -7,12 +7,12 @@ from .serializers import (
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.prefetch_related('teams').all()
     serializer_class = UserSerializer
 
 
 class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+    queryset = Team.objects.prefetch_related('members').all()
     serializer_class = TeamSerializer
 
 
@@ -22,7 +22,9 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
 
 class LeaderboardViewSet(viewsets.ModelViewSet):
-    queryset = Leaderboard.objects.all().order_by('-score')
+    queryset = Leaderboard.objects.select_related('user').prefetch_related(
+        'user__teams', 'user__activities'
+    ).order_by('-score')
     serializer_class = LeaderboardSerializer
 
 

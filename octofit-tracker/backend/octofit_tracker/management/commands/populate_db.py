@@ -94,7 +94,7 @@ class Command(BaseCommand):
             {
                 'name': 'Super Soldier Program',
                 'description': 'Full-body strength training like Steve Rogers',
-                'exercises': ['Deadlift 5x5', 'Bench press 5x5', 'Squat 5x5', 'overhead press 5x5'],
+                'exercises': ['Deadlift 5x5', 'Bench press 5x5', 'Squat 5x5', 'Overhead press 5x5'],
             },
             {
                 'name': 'Amazon Warrior Training',
@@ -110,6 +110,31 @@ class Command(BaseCommand):
                 'name': 'Speed Force Warm-up',
                 'description': 'Quick warm-up routine for Barry Allen fans',
                 'exercises': ['Dynamic stretching 10min', 'High knees 3x30s', 'Butt kicks 3x30s', 'Lateral shuffles 3x20'],
+            },
+            {
+                'name': 'Asgardian Thunder Power',
+                'description': 'Godly strength and endurance program inspired by Thor Odinson',
+                'exercises': ['Hammer swings 5x10', 'Weighted carries 4x50m', 'Battle ropes 5x30s', 'Viking press 4x8', 'Farmer walks 3x40m'],
+            },
+            {
+                'name': 'Black Widow Stealth Fitness',
+                'description': 'Agility, flexibility and combat conditioning like Natasha Romanoff',
+                'exercises': ['Gymnastics bridge 3x60s', 'Pistol squats 3x10', 'Handstand holds 3x30s', 'Martial arts combos 4x2min', 'Parkour drills 20min'],
+            },
+            {
+                'name': 'Hulk Smash Strength',
+                'description': 'Raw power and stress-relief training inspired by Bruce Banner',
+                'exercises': ['Heavy deadlifts 5x3', 'Tire flips 4x8', 'Sledgehammer slams 4x15', 'Medicine ball throws 3x12', 'Breathing cooldown 10min'],
+            },
+            {
+                'name': 'Man of Steel Endurance',
+                'description': 'Superhuman cardio and strength program like Clark Kent',
+                'exercises': ['Mile run 5x', 'Clean and jerk 4x6', 'Swimming sprints 10x50m', 'Pull-ups 4x15', 'Core stability circuit 20min'],
+            },
+            {
+                'name': 'Green Lantern Will Power',
+                'description': 'Mental focus and full-body conditioning like Hal Jordan',
+                'exercises': ['Concentration curls 4x12', 'Meditation & breath work 15min', 'Plyometric circuit 4x5min', 'Balance board 3x90s', 'Long-distance run 8km'],
             },
         ]
         for data in workouts_data:

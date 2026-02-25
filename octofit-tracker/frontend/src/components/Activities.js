@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
+// Parse ISO date string (YYYY-MM-DD) in local time to avoid UTC offset shifting the day
+const formatDate = (dateStr) => {
+  if (!dateStr) return '';
+  const [year, month, day] = dateStr.split('-').map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric',
+  });
+};
+
 const API_BASE = process.env.REACT_APP_CODESPACE_NAME
   ? `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev`
   : 'http://localhost:8000';
@@ -47,7 +56,7 @@ function Activities() {
                 <td><strong>{activity.user?.name || activity.user}</strong></td>
                 <td><span className="badge" style={{backgroundColor:'#0f3460'}}>{activity.activity_type}</span></td>
                 <td><span className="score-pill">{activity.duration} min</span></td>
-                <td>{activity.date}</td>
+                <td>{formatDate(activity.date)}</td>
               </tr>
             ))}
           </tbody>

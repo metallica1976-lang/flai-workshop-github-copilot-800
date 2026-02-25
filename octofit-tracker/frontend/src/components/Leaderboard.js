@@ -37,7 +37,8 @@ function Leaderboard() {
             <tr>
               <th>Rank</th>
               <th>Name</th>
-              <th>Email</th>
+              <th>Team</th>
+              <th>Total Calories</th>
               <th>Score</th>
             </tr>
           </thead>
@@ -48,7 +49,8 @@ function Leaderboard() {
                   <span className={`rank-badge ${rankClass(index)}`}>{index + 1}</span>
                 </td>
                 <td><strong>{entry.user?.name || entry.user}</strong></td>
-                <td className="text-muted small">{entry.user?.email || '—'}</td>
+                <td><span className="teal-pill">{entry.team || '—'}</span></td>
+                <td><span className="badge bg-warning text-dark">{entry.total_calories ?? 0} kcal</span></td>
                 <td><span className="score-pill">{entry.score}</span></td>
               </tr>
             ))}
